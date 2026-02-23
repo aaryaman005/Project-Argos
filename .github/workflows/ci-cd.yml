@@ -41,8 +41,9 @@ jobs:
           ruff check .
 
       - name: Run tests
-        run: pytest --tb=short
+        run: python -m pytest tests --tb=short
         env:
+          PYTHONPATH: .
           USE_MOCK_DATA: "true"
           JWT_SECRET: "ci-test-jwt-secret-do-not-use-in-production"
 

@@ -27,7 +27,7 @@ jobs:
 
       - name: Run backend logic tests
         run: |
-          pytest tests
+          python -m pytest tests
         env:
           PYTHONPATH: .
 
@@ -37,15 +37,11 @@ jobs:
           node-version: "20"
 
       - name: Install frontend dependencies
+        working-directory: soc-frontend
         run: |
           npm install
-        defaults:
-          run:
-            working-directory: soc-frontend
 
       - name: Build frontend
+        working-directory: soc-frontend
         run: |
           npm run build
-        defaults:
-          run:
-            working-directory: soc-frontend

@@ -1,9 +1,7 @@
 /// <reference types="vite/client" />
 
 declare module '*.jsx' {
-    import { ComponentType } from 'react';
-    const component: ComponentType<any>;
+    const component: any;
     export default component;
-    export const Card: any;
 }
 
