@@ -24,8 +24,7 @@ jobs:
 
       - name: Run backend logic tests
         run: |
-          # In a real setup, we'd run pytest here. For now, we verify the orchestrator starts.
-          python backend/main.py --simulate
+          pytest backend/tests
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
