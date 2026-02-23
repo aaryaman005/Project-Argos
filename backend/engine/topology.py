@@ -1,5 +1,5 @@
 import networkx as nx
-from typing import List, Dict
+
 
 class BlastRadiusAnalyzer:
     """
@@ -28,9 +28,12 @@ class BlastRadiusAnalyzer:
         
         # Normalize score (simplified)
         # 1-5 nodes: 0.2, 5-15: 0.5, 15+: 1.0
-        if impact_count == 0: return 0.1
-        if impact_count < 5: return 0.3
-        if impact_count < 15: return 0.7
+        if impact_count == 0:
+            return 0.1
+        if impact_count < 5:
+            return 0.3
+        if impact_count < 15:
+            return 0.7
         return 1.0
 
     def build_mock_infrastructure(self):

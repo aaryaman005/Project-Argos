@@ -1,11 +1,13 @@
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
-import json, os, uvicorn
+import json
+import os
+import uvicorn
 
-from models import Alert, Incident
+from models import Incident
 from main import SOCEngine
 from ingestion.stream import AlertSimulator
 from response.executor import ResponseExecutor

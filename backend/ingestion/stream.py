@@ -1,6 +1,5 @@
 import random
 import time
-from datetime import datetime
 from models import Alert, Severity
 
 class AlertSimulator:

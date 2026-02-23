@@ -22,7 +22,7 @@ class ResponseExecutor:
         elif action.type == ActionType.ISOLATE_HOST:
             print(f"[+] Host {action.target} moved to Quarantine VLAN")
         elif action.type == ActionType.NOTIFY_HUMAN:
-            print(f"[!] Notification sent to On-Call Analyst")
+            print("[!] Notification sent to On-Call Analyst")
             
         action.status = "completed"
         return True

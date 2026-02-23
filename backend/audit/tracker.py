@@ -78,9 +78,12 @@ class AuditLogger:
                 else:
                     # Map known types if severity is missing
                     a_type = record.get("alert_type", "").lower()
-                    if "ransomware" in a_type: stats["threat_levels"]["critical"] += 1
-                    elif "exfiltration" in a_type: stats["threat_levels"]["high"] += 1
-                    else: stats["threat_levels"]["medium"] += 1
+                    if "ransomware" in a_type:
+                        stats["threat_levels"]["critical"] += 1
+                    elif "exfiltration" in a_type:
+                        stats["threat_levels"]["high"] += 1
+                    else:
+                        stats["threat_levels"]["medium"] += 1
                     
             return stats
         except Exception as e:
