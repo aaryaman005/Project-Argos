@@ -9,6 +9,9 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - uses: actions/checkout@v4
 
@@ -24,9 +27,7 @@ jobs:
 
       - name: Run backend logic tests
         run: |
-          pytest backend/tests
-        env:
-          PYTHONPATH: backend
+          pytest tests
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -35,10 +36,14 @@ jobs:
 
       - name: Install frontend dependencies
         run: |
-          cd soc-frontend
           npm install
+        defaults:
+          run:
+            working-directory: soc-frontend
 
       - name: Build frontend
         run: |
-          cd soc-frontend
           npm run build
+        defaults:
+          run:
+            working-directory: soc-frontend
