@@ -20,6 +20,42 @@ class SOCEngine:
         self.optimizer = GreedyOptimizer()
         self.audit = AuditLogger()
         self.topology.build_mock_infrastructure()
+        self.resolved_incidents = []
+
+    def get_all_incidents(self):
+        active = self.queue.get_all()
+        return active + self.resolved_incidents
+
+    def get_stats(self):
+        all_incidents = self.get_all_incidents()
+        history = self.audit.get_historical_stats()
+        
+        # Current session counts
+        session_critical = len([i for i in all_incidents if i.alert.severity.name == 'CRITICAL'])
+        session_high = len([i for i in all_incidents if i.alert.severity.name == 'HIGH'])
+        session_medium = len([i for i in all_incidents if i.alert.severity.name == 'MEDIUM'])
+        session_low = len([i for i in all_incidents if i.alert.severity.name == 'LOW'])
+        
+        # Merge with history
+        total_critical = session_critical + history["threat_levels"]["critical"]
+        total_high = session_high + history["threat_levels"]["high"]
+        total_medium = session_medium + history["threat_levels"]["medium"]
+        total_low = session_low + history["threat_levels"]["low"]
+        
+        resolved_count = len(self.resolved_incidents) + history["resolved_count"]
+        
+        return {
+            "queue_size": self.queue.size(),
+            "incidents_resolved": resolved_count,
+            "total_threats": resolved_count + self.queue.size(),
+            "avg_mttr": "0.45s", # Placeholder
+            "threat_levels": {
+                "critical": total_critical, 
+                "high": total_high, 
+                "medium": total_medium, 
+                "low": total_low
+            }
+        }
 
     def process_new_alert(self, alert):
         # 1. Triage (Decision Tree)
@@ -54,6 +90,7 @@ class SOCEngine:
         
         # 8. Audit
         self.audit.log_incident(incident)
+        self.resolved_incidents.append(incident)
 
     def _generate_candidate_actions(self, incident: Incident) -> list:
         # Mocking possible responses for demonstration

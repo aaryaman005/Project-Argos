@@ -39,3 +39,6 @@ class PriorityQueue:
 
     def size(self) -> int:
         return len(self._queue)
+
+    def get_all(self) -> list:
+        return list(self._incidents.values())
