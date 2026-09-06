@@ -1,55 +1,123 @@
-# Project Argos: Autonomous SOC Response Engine
+# Project Argos — Autonomous SOC Response Engine
 
-> "Detection is easy. Response optimization under uncertainty is the real challenge."
+> *"Detection is easy. Response optimization under uncertainty is the real challenge."*
 
-Argos is a production-grade incident response engine that automates security actions using **Decision Intelligence**. It goes beyond static playbooks by applying DSA-based optimization to minimize business impact while maximizing risk reduction.
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-Vite-61DAFB?logo=react&logoColor=white)
+![NetworkX](https://img.shields.io/badge/NetworkX-Graph-orange)
+![CI](https://img.shields.io/badge/CI-GitHub_Actions-2088FF?logo=githubactions&logoColor=white)
 
-## 🚀 Core Features
+Argos is a production-grade incident response engine that automates security actions using **Decision Intelligence**. Instead of running static playbooks, it applies data-structure and algorithm–driven optimization to minimize business impact while maximizing risk reduction — deciding not just *whether* to respond, but *which* response set is optimal under cost and blast-radius constraints.
 
-- **Decision Tree Triage**: Automated classification of alert severity and confidence.
-- **Max-Heap Prioritization**: Real-time ranking of incidents based on risk-cost efficiency.
-- **Graph Blast Radius Analysis**: NetworkX-powered dependency mapping to evaluate operational impact.
-- **Greedy Optimization**: Cost-aware selection of the optimal response set.
-- **Autonomous Execution**: Simulated response actions (Block IP, Kill Process, Isolation).
+---
 
-## 🛠️ Tech Stack
+## Core Features
 
-- **Backend**: Python 3.11+, FastAPI, NetworkX, Pydantic
-- **Frontend**: React (Vite), Tailwind CSS, Lucide Icons, Recharts
-- **Operations**: GitHub Actions (CI/CD), Docker Support
+- **Decision Tree Triage** — automated classification of alert severity and confidence.
+- **Max-Heap Prioritization** — real-time ranking of incidents by risk-cost efficiency.
+- **Graph Blast Radius Analysis** — NetworkX-powered dependency mapping to evaluate operational impact.
+- **Greedy Optimization** — cost-aware selection of the optimal response set.
+- **Autonomous Execution** — simulated response actions (Block IP, Kill Process, Isolation).
+- **Audit & MTTR Tracking** — decision logs and mean-time-to-respond metrics for every action.
 
-## 📂 Project Structure
+---
 
-```bash
+## Architecture
+
+```
+Alert Stream
+     │
+     ▼
+Decision Tree Triage  ──►  severity + confidence
+     │
+     ▼
+Max-Heap Prioritization  ──►  risk-cost ranking
+     │
+     ▼
+Graph Blast Radius (NetworkX)  ──►  operational impact
+     │
+     ▼
+Greedy Optimizer  ──►  optimal response set
+     │
+     ▼
+Response Executor  ──►  Block IP · Kill Process · Isolate
+     │
+     ▼
+Audit / MTTR Tracker
+```
+
+---
+
+## Tech Stack
+
+| Layer      | Technology                                          |
+| :--------- | :-------------------------------------------------- |
+| Backend    | Python 3.11+, FastAPI, NetworkX, Pydantic           |
+| Frontend   | React (Vite), Tailwind CSS, Lucide Icons, Recharts  |
+| Operations | GitHub Actions (CI/CD), Docker support              |
+
+---
+
+## Project Structure
+
+```text
 Project-Argos/
 ├── backend/
-│   ├── engine/          # [CORE] Heap, Graph, Greedy logic
+│   ├── engine/          # [CORE] triage, priority heap, topology graph, greedy optimizer
 │   ├── ingestion/       # Alert stream simulator
 │   ├── response/        # Action executor
 │   ├── audit/           # MTTR tracker & decision logs
 │   ├── models.py        # Pydantic schemas
 │   ├── api.py           # FastAPI wrapper
 │   └── main.py          # Backend orchestrator
-├── frontend/            # React + Vite dashboard
+├── soc-frontend/        # React + Vite dashboard
 └── .github/workflows/   # CI/CD pipeline
 ```
 
-## 🚦 Quick Start
+---
+
+## Quick Start
 
 ### Backend
+
 ```bash
-pip install networkx pydantic fastapi uvicorn
-python backend/main.py
+cd backend
+pip install -r requirements.txt
+python main.py
 ```
 
 ### Frontend
+
 ```bash
-cd frontend
+cd soc-frontend
 npm install
 npm run dev
 ```
 
-## 📊 Metrics Tracked
-- **MTTR (Mean Time To Respond)**: Optimized to sub-second autonomous response.
-- **ROI (Risk Reduction per Cost)**: Calculated via Greedy selection.
-- **Human Escalation Rate**: Reducing alert fatigue by >80%.
+---
+
+## Metrics Tracked
+
+- **MTTR (Mean Time To Respond)** — optimized toward sub-second autonomous response.
+- **ROI (Risk Reduction per Cost)** — computed via greedy selection.
+- **Human Escalation Rate** — reducing alert fatigue by >80%.
+
+---
+
+## Testing
+
+```bash
+cd backend
+pytest
+```
+
+---
+
+## License
+
+See repository for license details.
+
+## Author
+
+**Aaryaman Bhatnagar** — [GitHub](https://github.com/aaryaman005) · [LinkedIn](https://www.linkedin.com/in/aaryaman-bhatnagar-06a517283/)
